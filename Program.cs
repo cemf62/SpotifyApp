@@ -14,7 +14,7 @@
 
                 Console.WriteLine("1, Albums");
 
-                Console.WriteLine("2, Songs");
+                Console.WriteLine("2, Playlist");
 
                 Console.WriteLine("3, Vrienden lijst");
 
@@ -23,7 +23,7 @@
                 Console.WriteLine("Optie: ");
 
                 optie = int.Parse(Console.ReadLine());
-
+                    
                 
                 switch (optie)
                 {
