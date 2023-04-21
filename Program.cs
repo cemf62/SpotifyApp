@@ -56,7 +56,6 @@
                 Console.WriteLine();
             } while (optie != 0);
 
-            // Wacht tot de gebruiker op een toets drukt voordat het programma wordt afgesloten
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
