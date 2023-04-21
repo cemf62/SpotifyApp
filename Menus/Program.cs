@@ -1,30 +1,22 @@
-﻿namespace SpotifyApp
+﻿namespace SpotifyApp.Menus
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-
             int optie = 0;
 
-            
             do
             {
                 Console.WriteLine("Selecteer een optie");
-
                 Console.WriteLine("1, Albums");
-
-                Console.WriteLine("2, Playlist");
-
+                Console.WriteLine("2, Playlists");
                 Console.WriteLine("3, Vrienden lijst");
-
                 Console.WriteLine("4, Profiel");
                 Console.WriteLine("0, Exit");
-                Console.WriteLine("Optie: ");
-
+                Console.Write("Optie: ");
                 optie = int.Parse(Console.ReadLine());
-                    
-                
+
                 switch (optie)
                 {
                     case 1:
@@ -33,20 +25,22 @@
                         albumsMenu.Display();
                         break;
                     case 2:
-                        Console.WriteLine("Navigating to Songs...");
-                        SongMenu songsMenu = new SongMenu();
-                        songsMenu.Display();
+                        Console.WriteLine("Navigating to Playlists...");
+                        PlaylistMenu playlistMenu = new PlaylistMenu();
+                        playlistMenu.Display();
                         break;
                     case 3:
-                        Console.WriteLine("Vriendenlijst...");
-                        VriendenMenu.vriendMenu = new VriendenMenu();
-                        VriendenMenu.dis
+                        Console.WriteLine("Navigating to Vriendenlijst...");
+                        VriendenMenu vriendenMenu = new VriendenMenu();
+                        vriendenMenu.Display();
                         break;
                     case 4:
-                        Console.WriteLine("Profiel...");
+                        Console.WriteLine("Navigating to Profile...");
+                        ProfileMenu profileMenu = new ProfileMenu();
+                        profileMenu.Display();
                         break;
                     case 0:
-                        Console.WriteLine("Exit...");
+                        Console.WriteLine("Exiting...");
                         break;
                     default:
                         Console.WriteLine("Onjuiste optie.");
@@ -59,5 +53,5 @@
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
-        }
     }
+}
