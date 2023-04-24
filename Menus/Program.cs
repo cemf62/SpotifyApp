@@ -8,10 +8,10 @@
 
             do
             {
-                Console.WriteLine("Selecteer een optie");
+                Console.WriteLine("Select option");
                 Console.WriteLine("1, Albums");
                 Console.WriteLine("2, Playlists");
-                Console.WriteLine("3, Vrienden lijst");
+                Console.WriteLine("3, Friend list");
                 Console.WriteLine("4, Profiel");
                 Console.WriteLine("0, Exit");
                 Console.Write("Optie: ");
@@ -30,7 +30,7 @@
                         playlistMenu.Display();
                         break;
                     case 3:
-                        Console.WriteLine("Navigating to Vriendenlijst...");
+                        Console.WriteLine("Navigating to Friendlist...");
                         VriendenMenu vriendenMenu = new VriendenMenu();
                         vriendenMenu.Display();
                         break;
@@ -43,7 +43,7 @@
                         Console.WriteLine("Exiting...");
                         break;
                     default:
-                        Console.WriteLine("Onjuiste optie.");
+                        Console.WriteLine("Invalid Option.");
                         break;
                 }
 

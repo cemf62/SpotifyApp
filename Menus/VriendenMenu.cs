@@ -8,10 +8,16 @@ namespace SpotifyApp.Menus
 {
     internal class VriendenMenu
     {
+        /// <summary>
+        /// hardcoded lijst friends word opgehaald. 
+        /// </summary>
         private List<string> friends = new List<string> { "John", "Jane", "Jack" };
-
+        /// <summary>
+        /// methode die input vraagt en vanuit hier kan de user navigeren naar Viewfriends waar vrienden hardcoded staan of ze kunnen kiezen om terug naar het menu te gaan. 
+        /// </summary>
         public void Display()
         {
+       
             int optie = 0;
 
             do
@@ -42,6 +48,9 @@ namespace SpotifyApp.Menus
             } while (optie != 2);
         }
 
+        /// <summary>
+        ///  view friends method die de lijst die boven de code is opgehaald met private list displayed. in een string worden friends onderelkaar geprint.
+        /// </summary>
         private void ViewFriends()
         {
             Console.WriteLine("Friends List:");

@@ -112,7 +112,7 @@ namespace SpotifyApp.Menus
                             break;
                         case 4:
                             Console.WriteLine("Add song to playlist (lateupdater)");
-                            // TODO: Functionality to add a song to a playlist
+                            // TODO: Functionality na playlist maken
                             break;
                         case 5:
                             Console.WriteLine("Going back to album...");
