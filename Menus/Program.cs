@@ -27,7 +27,7 @@
                     case 2:
                         Console.WriteLine("Navigating to Playlists...");
                         PlaylistMenu playlistMenu = new PlaylistMenu();
-                        playlistMenu.Display();
+                        playlistMenu.DisplayPlaylistMenu();
                         break;
                     case 3:
                         Console.WriteLine("Navigating to Friendlist...");
