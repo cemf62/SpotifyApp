@@ -11,7 +11,10 @@ namespace SpotifyApp.playlists
     {
         public string Name { get; set; }
         public List<Song> Songs { get; set; }
-
+         public void AddSong(Song song)
+    {
+        Songs.Add(song);
+    }
         public Playlist(string name)
         {
             Name = name;

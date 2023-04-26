@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpotifyApp.playlists;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace SpotifyApp.Menus
     internal class AlbumMenu
     {
         private List<Song> songs = new List<Song>();
+        private List<Playlist> playlist = new List<Playlist>();
 
         public void Display()
         {
@@ -111,9 +113,11 @@ namespace SpotifyApp.Menus
                             }
                             break;
                         case 4:
-                            Console.WriteLine("Add song to playlist (lateupdater)");
-                            // TODO: Functionality na playlist maken
+                            Console.WriteLine("Add song to playlist:");
+                            AddSongToPlaylist(songs);
                             break;
+
+
                         case 5:
                             Console.WriteLine("Going back to album...");
                             break;
@@ -126,5 +130,66 @@ namespace SpotifyApp.Menus
                 } while (optie != 5);
             } while (true);
         }
+
+        public void AddSongToPlaylist(List<Song> songs)
+        {
+            Console.WriteLine("Which playlist do you want to add the song to?");
+
+            if (playlist.Count == 0)
+            {
+                Console.WriteLine("Currently no playlists available.");
+                return;
+            }
+
+            Console.WriteLine("Current playlists:");
+            for (int i = 0; i < playlist.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {playlist[i].Name}");
+            }
+
+            Console.Write("Playlist name: ");
+            string playlistName = Console.ReadLine();
+
+            Playlist selectedPlaylist = null;
+
+            foreach (Playlist p in playlist)
+            {
+                if (p.Name == playlistName)
+                {
+                    selectedPlaylist = p;
+                    break;
+                }
+            }
+
+            if (selectedPlaylist == null)
+            {
+                Console.WriteLine("Playlist not found.");
+                return;
+            }
+
+            Console.WriteLine($"Adding song to {selectedPlaylist.Name}...");
+            Console.WriteLine("Which song do you want to add?");
+
+            for (int i = 0; i < songs.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {songs[i].Name} - {songs[i].Artist}");
+            }
+
+            Console.Write("Song: ");
+            int songIndex = int.Parse(Console.ReadLine()) - 1;
+
+            if (songIndex < 0 || songIndex >= songs.Count)
+            {
+                Console.WriteLine("Invalid song selection.");
+                return;
+            }
+
+            Song song = songs[songIndex];
+            selectedPlaylist.AddSong(song);
+
+            Console.WriteLine($"{song.Name} - {song.Artist} has been added to {selectedPlaylist.Name}!");
+        }
+
+
     }
 }
