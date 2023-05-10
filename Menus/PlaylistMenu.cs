@@ -6,7 +6,7 @@ namespace SpotifyApp.Menus
 {
     internal class PlaylistMenu
     {
-        private List<Playlist> playlists = new List<Playlist>();
+        private static List<Playlist> playlists = new List<Playlist>();
 
         public void DisplayPlaylistMenu()
         {
@@ -40,7 +40,8 @@ namespace SpotifyApp.Menus
                 Console.WriteLine();
             } while (option != 3);
         }
-        private void CreateNewPlaylist()
+
+        private static void CreateNewPlaylist()
         {
             Console.WriteLine("Enter the name for your new playlist:");
             string playlistName = Console.ReadLine();
@@ -51,9 +52,30 @@ namespace SpotifyApp.Menus
             Console.WriteLine($"New playlist '{playlistName}' has been created!");
             Console.WriteLine();
 
-            ViewPlaylists(); 
+            // print nieuwe gemaakt playlsit
+            Console.WriteLine($"{newPlaylist.Name}:");
+            Console.WriteLine();
+
+            Console.WriteLine($"{newPlaylist.Songs.Count + 1}. Go back to playlist overview");
+            Console.Write("Song: ");
+            int option = int.Parse(Console.ReadLine());
+
+            if (option == newPlaylist.Songs.Count + 1)
+            {
+                Console.WriteLine();
+                return;
+            }   
+
+            if (option < 1 || option > newPlaylist.Songs.Count)
+            {
+                Console.WriteLine("Invalid option.");
+                Console.WriteLine();
+                return;
+            }
         }
-        private void RemovePlaylist()
+
+
+        private static void RemovePlaylist(List<Playlist> playlists)
         {
             Console.WriteLine("Which playlist do you want to remove?");
             Console.Write("Playlist: ");
@@ -72,7 +94,8 @@ namespace SpotifyApp.Menus
             Console.WriteLine($"Playlist '{playlistToRemove.Name}' has been removed.");
         }
 
-        private void ViewPlaylists()
+
+        private static void ViewPlaylists()
         {
             Console.WriteLine("Playlist Overview:");
             Console.WriteLine();
@@ -109,7 +132,7 @@ namespace SpotifyApp.Menus
 
             if (optie == playlists.Count + 1)
             {
-                RemovePlaylist();
+                RemovePlaylist(playlists);
                 Console.WriteLine();
                 return;
             }
@@ -141,12 +164,12 @@ namespace SpotifyApp.Menus
                 Console.WriteLine();
                 return;
             }
+
+            Song selectedSong = selectedPlaylist.Songs[optie - 1];
+
+            Console.WriteLine();
+            Console.WriteLine($"Now playing '{selectedSong.ToString()}' from '{selectedPlaylist.Name}'!");
+            Console.WriteLine();
         }
-
-
-
     }
-} 
-
-
-
+}

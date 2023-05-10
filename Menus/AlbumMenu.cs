@@ -4,13 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
+
 
 namespace SpotifyApp.Menus
 {
     internal class AlbumMenu
     {
         private List<Song> songs = new List<Song>();
-        private List<Playlist> playlist = new List<Playlist>();
+        private static List<Playlist> playlists = new List<Playlist>();
+
+
 
         public void Display()
         {
@@ -29,16 +33,13 @@ namespace SpotifyApp.Menus
                 switch (optie)
                 {
                     case 1:
-                        songs = Song.GetSongsForAlbum(1);
-                        DisplaySongsForAlbum("Lijpe - Jackpot", songs);
+                        DisplaySongsForAlbum("Lijpe - Jackpot", Song.GetSongsForAlbum(1));
                         break;
                     case 2:
-                        songs = Song.GetSongsForAlbum(2);
-                        DisplaySongsForAlbum("Drake - Winner", songs);
+                        DisplaySongsForAlbum("Drake - Winner", Song.GetSongsForAlbum(2));
                         break;
                     case 3:
-                        songs = Song.GetSongsForAlbum(3);
-                        DisplaySongsForAlbum("Jackson - Dancing to the moon", songs);
+                        DisplaySongsForAlbum("Jackson - Dancing to the moon", Song.GetSongsForAlbum(3));
                         break;
                     case 0:
                         Console.WriteLine("Going back to main menu...");
@@ -114,7 +115,7 @@ namespace SpotifyApp.Menus
                             break;
                         case 4:
                             Console.WriteLine("Add song to playlist:");
-                            AddSongToPlaylist(songs);
+                            AddSongToPlaylist(selectedSong);
                             break;
 
 
@@ -131,20 +132,20 @@ namespace SpotifyApp.Menus
             } while (true);
         }
 
-        public void AddSongToPlaylist(List<Song> songs)
+        public void AddSongToPlaylist(Song song)
         {
             Console.WriteLine("Which playlist do you want to add the song to?");
 
-            if (playlist.Count == 0)
+            if (playlists.Count == 0)
             {
                 Console.WriteLine("Currently no playlists available.");
                 return;
             }
 
             Console.WriteLine("Current playlists:");
-            for (int i = 0; i < playlist.Count; i++)
+            for (int i = 0; i < playlists.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {playlist[i].Name}");
+                Console.WriteLine($"{i + 1}. {playlists[i].Name}");
             }
 
             Console.Write("Playlist name: ");
@@ -152,7 +153,7 @@ namespace SpotifyApp.Menus
 
             Playlist selectedPlaylist = null;
 
-            foreach (Playlist p in playlist)
+            foreach (Playlist p in playlists)
             {
                 if (p.Name == playlistName)
                 {
@@ -167,29 +168,16 @@ namespace SpotifyApp.Menus
                 return;
             }
 
-            Console.WriteLine($"Adding song to {selectedPlaylist.Name}...");
-            Console.WriteLine("Which song do you want to add?");
-
-            for (int i = 0; i < songs.Count; i++)
+            // maakt playlist als die niet al bestaat (empty)
+            if (selectedPlaylist.Songs == null)
             {
-                Console.WriteLine($"{i + 1}. {songs[i].Name} - {songs[i].Artist}");
+                selectedPlaylist.Songs = new List<Song>();
             }
 
-            Console.Write("Song: ");
-            int songIndex = int.Parse(Console.ReadLine()) - 1;
-
-            if (songIndex < 0 || songIndex >= songs.Count)
-            {
-                Console.WriteLine("Invalid song selection.");
-                return;
-            }
-
-            Song song = songs[songIndex];
-            selectedPlaylist.AddSong(song);
+            selectedPlaylist.Songs.Add(song);
 
             Console.WriteLine($"{song.Name} - {song.Artist} has been added to {selectedPlaylist.Name}!");
         }
-
 
     }
 }
